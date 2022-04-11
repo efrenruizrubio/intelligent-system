@@ -16,6 +16,7 @@
     "react-scripts": "5.0.0",
     "react-tsparticles": "^1.43.1",
     "sass": "^1.50.0",
+    "sweetalert2": "^11.4.8",
     "tsparticles": "^1.43.1",
     "web-vitals": "^2.1.4"
   },

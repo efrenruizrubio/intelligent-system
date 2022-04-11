@@ -2,17 +2,53 @@ import styles from "./login.module.scss";
 import logo from "assets/img/logo.png";
 import { useState } from "react";
 import { Input, Particles } from "components";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
+import Swal from "sweetalert2";
+import Axios from "axios";
+
+const Toast = Swal.mixin({
+  customClass: {
+    text: "swal__container",
+  },
+  toast: true,
+  position: "center",
+  background: "#2FD0B1",
+  confirmButtonColor: "#1B847D",
+  padding: "2rem",
+  timer: 2000,
+  timerProgressBar: true,
+});
 
 const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    Axios.post("http://localhost:3001/login", {
+      email: email,
+      password: password,
+    }).then((res) => {
+      if (res.data === "not-found") {
+        alert("El correo no se encuentra registrado");
+      } else if (res.data === "wrong-password") {
+        alert("La contraseña es incorrecta");
+      } else if (res.data === "success") {
+        Toast.fire({
+          title: "Acceso exitoso",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            setIsLoggedIn(true);
+          }
+        });
+      }
+    });
   };
   return (
     <>
+      {isLoggedIn ? <Navigate to="/home" /> : null}
       <Particles />
       <main className={styles.container}>
         <img src={logo} alt="logo" width={1378} height={1378} />

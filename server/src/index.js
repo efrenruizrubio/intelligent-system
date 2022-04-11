@@ -27,7 +27,7 @@ db.connect(function (err) {
     const userType = req.body.userType;
     salt = bcrypt.genSaltSync(10);
 
-    bcrypt.hash(req.body.password, salt, function (err, hash) {
+    bcrypt.hash(req.body.password, 10, function (err, hash) {
       if (err) {
         return;
       }
@@ -38,6 +38,43 @@ db.connect(function (err) {
           console.log(err || res);
         }
       );
+    });
+  });
+
+  app.post("/login", (req, res) => {
+    const email = req.body.email;
+    const password = req.body.password;
+
+    db.query("SELECT * FROM user WHERE email = ?", [email], (err, result) => {
+      if (err) {
+        return;
+      }
+      if (result.length === 0) {
+        res.send("not-found");
+      } else {
+        bcrypt.compare(
+          password,
+          result[0].password,
+          async function (err, isMatch) {
+            if (err) {
+              return;
+            }
+            if (isMatch) {
+              res.send("success");
+            } else {
+              res.send("wrong-password");
+            }
+          }
+        );
+        /* if (err) {
+            return;
+          }
+          if (result) {
+            res.send("success");
+          } else {
+            res.send("wrong-password");
+          } */
+      }
     });
   });
 });
