@@ -66,14 +66,14 @@ db.connect(function (err) {
             }
           }
         );
-        /* if (err) {
+        if (err) {
             return;
           }
           if (result) {
             res.send("success");
           } else {
             res.send("wrong-password");
-          } */
+          }
       }
     });
   });
