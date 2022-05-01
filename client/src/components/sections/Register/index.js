@@ -1,7 +1,7 @@
 import styles from "./register.module.scss";
 import logo from "assets/img/logo.png";
 import { useState } from "react";
-import { Input, Particles } from "components";
+import { Input } from "components";
 import { Link } from "react-router-dom";
 import Axios from "axios";
 
@@ -25,7 +25,6 @@ const RegisterForm = () => {
   };
   return (
     <>
-      <Particles />
       <main className={styles.container}>
         <img src={logo} alt="logo" width={1378} height={1378} />
         <fieldset className={styles.fieldset}>

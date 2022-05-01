@@ -3,3 +3,7 @@ export { default as Input } from "./Input";
 export { default as Particles } from "./Particles";
 export { default as RegisterForm } from "./sections/Register";
 export { default as DashboardPage } from "./sections/DashboardPage";
+export { default as Header } from "./Header";
+export { default as MainContainer } from "./MainContainer";
+export { default as Aside } from "./Aside";
+export { default as Section } from "./Section";

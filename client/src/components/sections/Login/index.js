@@ -1,7 +1,7 @@
 import styles from "./login.module.scss";
 import logo from "assets/img/logo.png";
 import { useState } from "react";
-import { Input, Particles } from "components";
+import { Input } from "components";
 import { Link, Navigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import Axios from "axios";
@@ -31,13 +31,21 @@ const LoginForm = () => {
       email: email,
       password: password,
     }).then((res) => {
+      res.data.split(" ");
       if (res.data === "not-found") {
-        alert("El correo no se encuentra registrado");
+        Toast.fire({
+          title: "No se encuentra el correo",
+          icon: "error",
+        });
       } else if (res.data === "wrong-password") {
-        alert("La contraseña es incorrecta");
+        Toast.fire({
+          title: "La contraseña es incorrecta",
+          icon: "error",
+        });
       } else if (res.data === "success") {
         Toast.fire({
           title: "Acceso exitoso",
+          icon: "success",
         }).then((result) => {
           if (result.isConfirmed) {
             setIsLoggedIn(true);
@@ -49,7 +57,6 @@ const LoginForm = () => {
   return (
     <>
       {isLoggedIn ? <Navigate to="/home" /> : null}
-      <Particles />
       <main className={styles.container}>
         <img src={logo} alt="logo" width={1378} height={1378} />
         <fieldset className={styles.fieldset}>

@@ -34,9 +34,6 @@ db.connect(function (err) {
       db.query(
         "INSERT INTO user (name, email, password, user_type) VALUES (?,?,?,?)",
         [name, email, hash, userType],
-        (err, res) => {
-          console.log(err || res);
-        }
       );
     });
   });
@@ -66,29 +63,10 @@ db.connect(function (err) {
             }
           }
         );
-        if (err) {
-            return;
-          }
-          if (result) {
-            res.send("success");
-          } else {
-            res.send("wrong-password");
-          }
       }
     });
   });
 });
-
-/* bcrypt.compare(password, hashedPassword, async function (err, isMatch) {
-      if (isMatch) {
-        console.log("Encrypted password is: ", password);
-        console.log("Decrypted password is: ", hashedPassword);
-      }
-
-      if (!isMatch) {
-        console.log(hashedPassword + " is not encryption of " + password);
-      }
-    }); */
 
 app.listen(3001, () => {
   console.log("Server running on port 3001");
