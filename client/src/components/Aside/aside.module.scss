@@ -1,16 +1,44 @@
 @use "styles/variables.scss";
 
-.asideContainer {
+.aside {
     display: flex;
-    justify-content: center;
-    width: 25%;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
     background: variables.$secondary-color-opacity;
     border-right: 3px solid black;
 
     &__title {
         padding: 2rem;
-        font-size: 2.5rem;
+        font-size: 3.5rem;
         font-weight: bold;
     }
 
+    &__nav {
+        height: 100%;
+
+        &__ul {
+            height: inherit;
+            display: flex;
+            flex-direction: column;
+            list-style: none;
+            text-align: center;
+            align-items: center;
+            justify-content: space-around;
+        }
+
+        &--item {
+            padding: 2rem 0;
+        }
+
+        &__a {
+            font-size: 3rem;
+            text-decoration: none;
+            color: black;
+
+            &:hover {
+                color: variables.$primary-color;
+            }
+        }
+    }
 }

@@ -56,7 +56,7 @@ const LoginForm = () => {
   };
   return (
     <>
-      {isLoggedIn ? <Navigate to="/home" /> : null}
+      {isLoggedIn ? <Navigate to="/dashboard" /> : null}
       <main className={styles.container}>
         <img src={logo} alt="logo" width={1378} height={1378} />
         <fieldset className={styles.fieldset}>

@@ -1,9 +1,42 @@
+import { Link } from "react-router-dom";
 import styles from "./aside.module.scss";
+
+const links = [
+  {
+    name: "Dashboard",
+    path: "/dashboard",
+  },
+  {
+    name: "Enfermedades",
+    path: "/dashboard/diseases",
+  },
+  {
+    name: "Pacientes",
+    path: "/dashboard/patients",
+  },
+  {
+    name: "Historial clínico",
+    path: "/dashboard/history",
+  },
+];
 
 const Aside = ({ title, className = "" }) => {
   return (
-    <aside className={`${styles.asideContainer} ${className}`}>
-      <p className={styles.asideContainer__title}>{title}</p>
+    <aside className={`${styles.aside} ${className}`}>
+      <h2 className={styles.aside__title}>{title}</h2>
+      <nav className={styles.aside__nav}>
+        <ul className={styles.aside__nav__ul}>
+          {links.map(({ name, path }) => (
+            <>
+              <li className={styles["aside__nav--item"]} key={name}>
+                <Link className={styles.aside__nav__a} to={path}>
+                  {name}
+                </Link>
+              </li>
+            </>
+          ))}
+        </ul>
+      </nav>
     </aside>
   );
 };
