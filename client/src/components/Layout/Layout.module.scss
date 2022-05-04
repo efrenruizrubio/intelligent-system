@@ -3,11 +3,15 @@
 .layout {
     display: grid;
     grid-template-columns: 1fr 4fr;
-    min-height: 90vh;
     width: 100%;
+    max-height: calc(100vh - 10rem);
 }
 
 .container {
-    width: 100%;
     background: variables.$secondary-color-opacity;
+    max-height: calc(100vh - 10rem);
+    min-height: calc(100vh - 10rem);
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+    overflow-y: auto;
 }

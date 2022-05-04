@@ -1,0 +1,25 @@
+@use "styles/variables.scss";
+
+.button {
+    border: none;
+    border-radius: 1rem;
+    color: variables.$input-text;
+    font-family: variables.$font-family;
+    text-transform: uppercase;
+    margin: 0 auto;
+    font-size: 2rem;
+    padding: 1.5rem 3rem;
+    background-color: variables.$primary-color;
+
+    &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+
+    &:hover:not(:disabled) {
+        transform: scale(1.1);
+        transition: all 0.5s ease;
+        cursor: pointer;
+        color: variables.$primary-color;
+    }
+}

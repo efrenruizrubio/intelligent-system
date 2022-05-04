@@ -1,11 +1,103 @@
 @use "styles/variables.scss";
 
+.buttonCreate {
+    &:hover:not(:disabled) {
+        transform: scale(1.1);
+        transition: all 0.5s ease;
+        cursor: pointer;
+        color: variables.$secondary-color;
+    }
+}
+
 .container {
     display: flex;
-    flex-direction: column;
     align-items: center;
+    flex-direction: column;
 
     &__title {
         padding: 2rem;
+    }
+
+    &__form__input {
+        font-family: variables.$font-family;
+    }
+}
+
+.fieldset {
+    margin: 0 auto;
+    width: 25%;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+
+    legend {
+        text-align: center;
+        text-transform: uppercase;
+        font-size: 3rem;
+        background-color: variables.$primary-color;
+        width: 100%;
+        padding: 3rem;
+        border-radius: 4rem 4rem 0 0;
+    }
+
+    &__form {
+        background-color: rgba(0, 0, 0, 0.65);
+        padding: 4rem 2rem;
+        display: flex;
+        border-radius: 0 0 4rem 4rem;
+        flex-direction: column;
+        margin-bottom: 3rem;
+
+        &__link {
+            color: variables.$input-text;
+            text-decoration: none;
+            font-size: 2rem;
+            margin: 0 auto;
+            padding: 2.5rem;
+            width: fit-content;
+
+            &:hover {
+                transform: scale(1.1);
+                transition: all 0.5s ease;
+                color: variables.$primary-color;
+            }
+        }
+
+        & div {
+            display: flex;
+
+        }
+
+        & .sendButton {
+            width: 50%;
+            margin-top: 4rem
+        }
+
+        & .sendButton:hover:not(:disabled) {
+            transform: scale(1.1);
+            transition: all 0.5s ease;
+            cursor: pointer;
+            color: variables.$primary-color;
+        }
+    }
+
+    & button {
+        background: variables.$secondary-color;
+
+        padding: 1rem;
+
+        &:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        &:hover:not(:disabled) {
+            transform: scale(1.1);
+            transition: all 0.5s ease;
+            cursor: pointer;
+            color: variables.$primary-color;
+        }
     }
 }

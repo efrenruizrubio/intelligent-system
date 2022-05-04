@@ -1,10 +1,11 @@
 import styles from "./login.module.scss";
 import logo from "assets/img/logo.png";
-import { useState } from "react";
-import { Input } from "components";
+import { useState, useContext, useEffect } from "react";
+import { Input, Button } from "components";
 import { Link, Navigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import Axios from "axios";
+import UserContext from "context/UserContext";
 
 const Toast = Swal.mixin({
   customClass: {
@@ -20,18 +21,27 @@ const Toast = Swal.mixin({
 });
 
 const LoginForm = () => {
+  const { setUser } = useContext(UserContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [blockButton, setBlockButton] = useState(true);
+
+  useEffect(() => {
+    if (email && password) {
+      setBlockButton(false);
+    } else {
+      setBlockButton(true);
+    }
+  }, [email, password]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
+    setBlockButton(true);
     Axios.post("http://localhost:3001/login", {
       email: email,
       password: password,
     }).then((res) => {
-      res.data.split(" ");
       if (res.data === "not-found") {
         Toast.fire({
           title: "No se encuentra el correo",
@@ -42,12 +52,13 @@ const LoginForm = () => {
           title: "La contraseña es incorrecta",
           icon: "error",
         });
-      } else if (res.data === "success") {
+      } else if (res.data.status === "success") {
+        setUser(res.data.result);
         Toast.fire({
           title: "Acceso exitoso",
           icon: "success",
         }).then((result) => {
-          if (result.isConfirmed) {
+          if (result.isConfirmed || result.isDismissed) {
             setIsLoggedIn(true);
           }
         });
@@ -79,7 +90,11 @@ const LoginForm = () => {
             <Link to="/register" className={styles.fieldset__form__link}>
               Registrarse
             </Link>
-            <input type="submit" value="Iniciar sesión" />
+            <Button
+              value="Iniciar sesión"
+              disabled={blockButton}
+              className={styles.button}
+            />
           </form>
         </fieldset>
       </main>

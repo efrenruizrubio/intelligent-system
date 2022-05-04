@@ -21,7 +21,7 @@ db.connect(function (err) {
     console.error("error connecting: " + err.stack);
     return;
   }
-  app.post("/register", (req, res) => {
+  app.post("/register/user", (req, res) => {
     const name = req.body.name;
     const email = req.body.email;
     const userType = req.body.userType;
@@ -34,6 +34,14 @@ db.connect(function (err) {
       db.query(
         "INSERT INTO user (name, email, password, user_type) VALUES (?,?,?,?)",
         [name, email, hash, userType],
+        (err, result) => {
+          if (err) {
+            return;
+          }
+          if (result.affectedRows) {
+            res.send("success");
+          }
+        }
       );
     });
   });
@@ -57,7 +65,7 @@ db.connect(function (err) {
               return;
             }
             if (isMatch) {
-              res.send("success");
+              res.send({ status: "success", result: result[0] });
             } else {
               res.send("wrong-password");
             }
@@ -65,6 +73,26 @@ db.connect(function (err) {
         );
       }
     });
+  });
+
+  app.post("/register/disease", (req, res) => {
+    const disease = req.body.disease;
+    const sign = req.body.sign;
+    const symptom = req.body.symptom;
+
+    db.query(
+      "INSERT INTO disease (name) VALUES (?)",
+      [disease],
+      (err, result) => {
+        if (err) {
+          res.send(err);
+          return;
+        }
+        if (result.affectedRows) {
+          res.send({ status: "success", id: result.insertId });
+        }
+      }
+    );
   });
 });
 

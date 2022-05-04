@@ -51,25 +51,8 @@
             }
         }
 
-
-
-        input[type="submit"] {
-            border: none;
-            border-radius: 1rem;
-            color: white;
-            font-family: variables.$font-family;
-            text-transform: uppercase;
-            margin: 0 auto;
-            font-size: 2rem;
-            padding: 1.5rem 3rem;
+        .button {
             background-color: variables.$secondary-color;
-
-            &:hover {
-                transform: scale(1.1);
-                transition: all 0.5s ease;
-                cursor: pointer;
-                color: variables.$primary-color;
-            }
         }
     }
 }

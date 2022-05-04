@@ -7,21 +7,25 @@ import Diseases from "pages/Diseases";
 import Patients from "pages/Patients";
 import History from "pages/History";
 import { Particles, Layout } from "components";
+import UserContext from "context/UserContext";
+import useInitialState from "hooks/useInitialState";
 
 function App() {
   return (
     <div className="app">
       <Particles />
-      <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/dashboard/" element={<Layout />}>
-          <Route index element={<Dashboard />} />
-          <Route path="diseases" element={<Diseases />} />
-          <Route path="patients" element={<Patients />} />
-          <Route path="history" element={<History />} />
-        </Route>
-      </Routes>
+      <UserContext.Provider value={useInitialState()}>
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/dashboard/" element={<Layout />}>
+            <Route index element={<Dashboard />} />
+            <Route path="diseases" element={<Diseases />} />
+            <Route path="patients" element={<Patients />} />
+            <Route path="history" element={<History />} />
+          </Route>
+        </Routes>
+      </UserContext.Provider>
     </div>
   );
 }

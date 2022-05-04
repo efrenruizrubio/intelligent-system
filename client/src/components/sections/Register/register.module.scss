@@ -51,7 +51,7 @@
             }
         }
 
-        input[type="submit"] {
+        button {
             border: none;
             border-radius: 1rem;
             color: variables.$input-text;
@@ -62,7 +62,12 @@
             padding: 1.5rem 3rem;
             background-color: variables.$secondary-color;
 
-            &:hover {
+            &:disabled {
+                opacity: 0.5;
+                cursor: not-allowed;
+            }
+
+            &:hover:not(:disabled) {
                 transform: scale(1.1);
                 transition: all 0.5s ease;
                 cursor: pointer;

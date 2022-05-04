@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import styles from "./aside.module.scss";
+/* import { useContext } from "react";
+import UserContext from "context/UserContext"; */
 
 const links = [
   {
@@ -28,7 +30,7 @@ const Aside = ({ title, className = "" }) => {
         <ul className={styles.aside__nav__ul}>
           {links.map(({ name, path }) => (
             <>
-              <li className={styles["aside__nav--item"]} key={name}>
+              <li className={styles["aside__nav--item"]}>
                 <Link className={styles.aside__nav__a} to={path}>
                   {name}
                 </Link>
