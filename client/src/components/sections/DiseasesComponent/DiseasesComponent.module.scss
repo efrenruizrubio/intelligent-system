@@ -50,6 +50,15 @@
         flex-direction: column;
         margin-bottom: 3rem;
 
+        & span {
+            font-size: 2rem;
+            color: variables.$primary-color;
+
+            & input {
+                display: block;
+            }
+        }
+
         &__link {
             color: variables.$input-text;
             text-decoration: none;
@@ -100,4 +109,8 @@
             color: variables.$primary-color;
         }
     }
+}
+
+#symptomSpan {
+    padding-top: 2rem;
 }
